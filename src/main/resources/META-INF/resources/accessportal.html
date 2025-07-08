@@ -1,0 +1,63 @@
+
+<!-- ✅ accessportal.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Access Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 360px;
+    }
+    h2 {
+      color: #28a745;
+      margin-bottom: 20px;
+    }
+    .error-msg {
+      color: #d40000;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<div class="container" id="portalContainer">
+  <h2>✅ Access Portal Successfully</h2>
+  <button onclick="logoutUser()">Logout</button>
+</div>
+<div class="container" id="notLoggedInContainer" style="display: none;">
+  <p class="error-msg">You are not logged in.</p>
+  <button onclick="window.location.href='index.html'">Login</button>
+</div>
+<script src="script.js"></script>
+<script>
+  checkLoginStatus("portalContainer", "notLoggedInContainer");
+</script>
+</body>
+</html>
