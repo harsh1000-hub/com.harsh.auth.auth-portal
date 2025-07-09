@@ -12,6 +12,9 @@ release.properties
 .settings/
 bin/
 
+# applcation properties
+src/main/resources/application.properties
+
 # IntelliJ
 .idea
 *.ipr

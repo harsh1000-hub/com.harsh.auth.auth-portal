@@ -60,3 +60,48 @@ If you want to learn more about building native executables, please consult <htt
 - REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
 - JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
 - Mailer ([guide](https://quarkus.io/guides/mailer)): Send emails
+
+## CODE FLOWS:-
+
+## Authentication APIs
+| Method | Endpoint         | Description                                                                                                     |
+| ------ | ---------------- | --------------------------------------------------------------------------------------------------------------- |
+| POST   | `/signup`        | Registers a new user. Stores password as salted hash using `BCrypt`. Returns verification token.                |
+| GET    | `/verify?token=` | Verifies user email using token. Sets `isEmailVerified=true`.                                                   |
+| POST   | `/login`         | Authenticates user and creates session via secure cookie. If not verified, returns a message to validate email. |
+| GET    | `/logout`        | Logs out the user. Clears session cookie.                                                                       |
+
+## User Data APIs
+| Method | Endpoint   | Description                                                                                     |
+| ------ | ---------- | ----------------------------------------------------------------------------------------------- |
+| GET    | `/profile` | Returns current logged-in user's info from cookie-based session. Requires valid session cookie. |
+
+## Session Management
+- Session is maintained via an HTTP-only cookie (userId) with a 30-minute expiration. 
+- Cookies are automatically cleared on logout from frontend using.
+
+## Summary of Frontend Features
+- Signup form with email and password.
+- Password is encrypted and stored securely.
+- Email validation flow with token.
+- Login page handles both verified and unverified users:
+- Verified: Access to portal.
+- Not Verified: Shows "validate your email" message.
+- Access portal page restricted to verified users.
+- Profile page shows current user or "not logged in".
+- Full logout handling on both backend (session) and frontend (localStorage).
+
+## Frontend Part:
+| Page                | Description                                            | Path                        |
+| ------------------- | ------------------------------------------------------ | --------------------------- |
+| `index.html`        | Login Page                                             | `/portal/index.html`        |
+| `signup.html`       | Signup Page                                            | `/portal/signup.html`       |
+| `accessportal.html` | Post-login success page for verified users             | `/portal/accessportal.html` |
+| `profile.html`      | Profile Page showing user email or not-logged-in state | `/portal/profile.html`      |
+
+
+## Deployment on AWS (Free Tier)
+- The entire application is deployed on an Ubuntu EC2 instance (AWS Free Tier) using the following stack:
+
+## Live Demo
+- URL : http://<your-ec2-ip>:8080   // replace with public IP
